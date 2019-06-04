@@ -1,0 +1,39 @@
+ManifestFileVersion: 0
+CRC: 1151878506
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 09669d2674be8c684ae0ed931b7d6784
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: a6ef195097812456ef7f36193b99fcc1
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
+  Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
+  Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 128
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+Assets:
+- Assets/Prefabs/battle/role_info.prefab
+Dependencies:
+- D:/kvgame/SongOfTime/program/art/Assets/../assetbundles/Android/prefabs/battle_pause.unity3d

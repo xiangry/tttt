@@ -1,0 +1,23 @@
+ManifestFileVersion: 0
+CRC: 3746954105
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 4f642def3a0c663769d49946674e3652
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: ea5a42e0fd8ea905efa7aa926a3b8944
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/Textures/shared/main_skill_bg3.png
+- Assets/Textures/shared/main_skill_bg1.png
+- Assets/Textures/shared/sub_skill_bg2.png
+- Assets/Textures/shared/sub_skill_bg3.png
+- Assets/Textures/shared/sub_skill_bg1.png
+- Assets/Textures/shared/main_skill_bg2.png
+Dependencies: []

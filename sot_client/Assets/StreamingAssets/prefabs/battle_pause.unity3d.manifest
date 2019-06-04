@@ -1,0 +1,28 @@
+ManifestFileVersion: 0
+CRC: 1516109453
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 0efe54574e66f0f7458ce2205a811de8
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: ea5a42e0fd8ea905efa7aa926a3b8944
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/Textures/battle_pause/battle_enemy_bg.png
+- Assets/Textures/battle_pause/battle_pause_bg.png
+- Assets/Textures/battle_pause/battle_blood2.png
+- Assets/Textures/battle_pause/battle_pause_mask.png
+- Assets/Textures/battle_pause/battle_blood1.png
+- Assets/Textures/battle_pause/battle_self_bg.png
+- Assets/Textures/battle_pause/battle_blood3.png
+- Assets/Textures/battle_pause/battle_enemy_camp_txt.png
+- Assets/Textures/battle_pause/battle_self_camp_txt.png
+- Assets/Textures/battle_pause/battle_pause_txt.png
+- Assets/Textures/battle_pause/battle_blood_bg.png
+Dependencies: []

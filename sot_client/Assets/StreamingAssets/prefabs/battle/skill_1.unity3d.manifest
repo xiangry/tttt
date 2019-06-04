@@ -1,0 +1,28 @@
+ManifestFileVersion: 0
+CRC: 1532205721
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 1d077fe58ebf9903392643dc4bf63279
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 2c741a59cff4c34c27e0ae4513a21d7f
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+Assets:
+- Assets/Prefabs/battle/skill_1.prefab
+Dependencies:
+- D:/kvgame/SongOfTime/program/art/Assets/../assetbundles/Android/prefabs/battle.unity3d
+- D:/kvgame/SongOfTime/program/art/Assets/../assetbundles/Android/prefabs/shared.unity3d

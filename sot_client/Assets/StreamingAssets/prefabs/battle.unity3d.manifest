@@ -1,0 +1,50 @@
+ManifestFileVersion: 0
+CRC: 3166214350
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: b61db1f0cc50ca06a5999ee10b376bc3
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: ea5a42e0fd8ea905efa7aa926a3b8944
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/Textures/battle/cost_num5.png
+- Assets/Textures/battle/battle_blood_1.png
+- Assets/Textures/battle/cost_num0.png
+- Assets/Textures/battle/round_num3.png
+- Assets/Textures/battle/round_num7.png
+- Assets/Textures/battle/round_num6.png
+- Assets/Textures/battle/battle_blood_2.png
+- Assets/Textures/battle/cost_num6.png
+- Assets/Textures/battle/battle_skill_story_bg.png
+- Assets/Textures/battle/round_num1.png
+- Assets/Textures/battle/cost_num8.png
+- Assets/Textures/battle/cost_num7.png
+- Assets/Textures/battle/cost_num3.png
+- Assets/Textures/battle/battle_btn_bg.png
+- Assets/Textures/battle/battle_blood_3.png
+- Assets/Textures/battle/battle_blood_bg.png
+- Assets/Textures/battle/round_num2.png
+- Assets/Textures/battle/battle_btn2.png
+- Assets/Textures/battle/battle_btn3.png
+- Assets/Textures/battle/battle_round_bg.png
+- Assets/Textures/battle/cost_num1.png
+- Assets/Textures/battle/cost_num4.png
+- Assets/Textures/battle/round_num8.png
+- Assets/Textures/battle/battle_round_txt.png
+- Assets/Textures/battle/round_num5.png
+- Assets/Textures/battle/cost_num9.png
+- Assets/Textures/battle/battle_skills_bg.png
+- Assets/Textures/battle/battle_btn4.png
+- Assets/Textures/battle/cost_num2.png
+- Assets/Textures/battle/round_num4.png
+- Assets/Textures/battle/round_num0.png
+- Assets/Textures/battle/battle_btn1.png
+- Assets/Textures/battle/round_num9.png
+Dependencies: []
