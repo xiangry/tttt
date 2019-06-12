@@ -11,7 +11,8 @@ namespace LuaFramework {
         Transform Parent {
             get {
                 if (parent == null) {
-                    GameObject go = GameObject.FindWithTag("GuiCamera");
+                    //GameObject go = GameObject.FindWithTag("GuiCamera");
+                    GameObject go = GameObject.FindWithTag("Canvas");
                     if (go != null) parent = go.transform;
                 }
                 return parent;
@@ -22,9 +23,18 @@ namespace LuaFramework {
         /// ������壬������Դ������
         /// </summary>
         /// <param name="type"></param>
-        public void CreatePanel(string name, LuaFunction func = null) {
+        public void CreatePanel(string name, string abName = null, LuaFunction func = null) {
             string assetName = name + "Panel";
-            string abName = name.ToLower() + AppConst.ExtName;
+            if(abName == null)
+            {
+                abName = name.ToLower() + AppConst.ExtName;
+            }
+            else
+            {
+                abName = abName.ToLower() + AppConst.ExtName;
+            }
+            Debug.Log("CreatePanel assetName " + assetName);
+            Debug.Log("CreatePanel abName " + abName);
             if (Parent.Find(name) != null) return;
 
 #if ASYNC_MODE

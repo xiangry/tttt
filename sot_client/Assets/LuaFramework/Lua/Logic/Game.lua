@@ -48,8 +48,9 @@ function Game.OnInitOK()
     --coroutine.start(this.test_coroutine);
 
     CtrlManager.Init();
-    local ctrl = CtrlManager.GetCtrl(CtrlNames.Prompt);
-    if ctrl ~= nil and AppConst.ExampleMode == 1 then
+    local ctrl = CtrlManager.GetCtrl(CtrlNames.BattleUI);
+    logWarn('LuaFramework ctrl --->>>' .. tostring(ctrl));
+    if ctrl ~= nil then
         ctrl:Awake();
     end
        

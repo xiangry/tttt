@@ -15,8 +15,8 @@ end
 
 --初始化面板--
 function BattleUIPanel.InitPanel()
-	this.btnOpen = transform:Find("Open").gameObject;
-	this.gridParent = transform:Find('ScrollView/Grid');
+	--this.btnOpen = transform:Find("Open").gameObject;
+	--this.gridParent = transform:Find('ScrollView/Grid');
 end
 
 --单击事件--

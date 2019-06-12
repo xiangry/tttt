@@ -14,7 +14,7 @@ end
 
 function BattleUICtrl.Awake()
 	logWarn("BattleUICtrl.Awake--->>");
-    panelMgr:CreatePanel('BattleUI', this.OnCreate);
+    panelMgr:CreatePanel('BattleUI', "battle/battleuipanel", this.OnCreate);
 end
 
 --启动事件--

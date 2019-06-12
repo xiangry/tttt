@@ -63,6 +63,7 @@ namespace LuaFramework {
                 return abName;
             }
             abName = abName.ToLower();
+            Debug.Log("GetRealAssetPath " + abName);
             if (!abName.EndsWith(AppConst.ExtName)) {
                 abName += AppConst.ExtName;
             }
@@ -106,15 +107,16 @@ namespace LuaFramework {
 
         IEnumerator OnLoadAsset<T>(string abName) where T : UObject
         {
+            Debug.Log("abName ===== " + abName);
+
             AssetBundleInfo bundleInfo = GetLoadedAssetBundle(abName);
-            Debug.Log(bundleInfo);
+            Debug.Log("bundleInfo ==== " + bundleInfo);
             if (bundleInfo == null) {
                 yield return StartCoroutine(OnLoadAssetBundle(abName, typeof(T)));
 
                 bundleInfo = GetLoadedAssetBundle(abName);
                 if (bundleInfo == null) {
                     m_LoadRequests.Remove(abName);
-                    Debug.LogError("OnLoadAsset--->>>" + abName);
                     yield break;
                 }
             }

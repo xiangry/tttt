@@ -1,12 +1,14 @@
 
 CtrlNames = {
 	Prompt = "PromptCtrl",
-	Message = "MessageCtrl"
+	Message = "MessageCtrl",
+	BattleUI = "BattleUICtrl",
 }
 
 PanelNames = {
 	"PromptPanel",	
 	"MessagePanel",
+	"BattleUIPanel",
 }
 
 --协议类型--

@@ -28,12 +28,13 @@ public class LuaFramework_PanelManagerWrap
 				obj.CreatePanel(arg0);
 				return 0;
 			}
-			else if (count == 3)
+			else if (count == 4)
 			{
 				LuaFramework.PanelManager obj = (LuaFramework.PanelManager)ToLua.CheckObject<LuaFramework.PanelManager>(L, 1);
 				string arg0 = ToLua.CheckString(L, 2);
-				LuaFunction arg1 = ToLua.CheckLuaFunction(L, 3);
-				obj.CreatePanel(arg0, arg1);
+                string arg1 = ToLua.CheckString(L, 3);
+                LuaFunction arg2 = ToLua.CheckLuaFunction(L, 4);
+				obj.CreatePanel(arg0, arg1, arg2);
 				return 0;
 			}
 			else

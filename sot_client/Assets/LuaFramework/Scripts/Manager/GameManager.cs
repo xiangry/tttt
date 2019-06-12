@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using LuaInterface;
 using System.Reflection;
 using System.IO;
+using UnityEngine.Networking;
 
 
 namespace LuaFramework {
@@ -58,11 +59,20 @@ namespace LuaFramework {
             Debug.Log(infile);
             Debug.Log(outfile);
             if (Application.platform == RuntimePlatform.Android) {
-                WWW www = new WWW(infile);
-                yield return www;
-
-                if (www.isDone) {
-                    File.WriteAllBytes(outfile, www.bytes);
+                //WWW www = new WWW(infile);
+                //yield return www;
+                //if (www.isDone) {
+                //    File.WriteAllBytes(outfile, www.bytes);
+                //}
+                UnityWebRequest request = UnityWebRequest.Get(infile);
+                yield return request.SendWebRequest();
+                if (request.error != null)
+                {
+                    Debug.LogError("get ab file error " + infile + " " + request.error.ToString());
+                }
+                if (request.isDone)
+                {
+                    File.WriteAllBytes(outfile, request.downloadHandler.data);
                 }
                 yield return 0;
             } else File.Copy(infile, outfile, true);
@@ -220,7 +230,9 @@ namespace LuaFramework {
         /// </summary>
         public void OnResourceInited() {
 #if ASYNC_MODE
-            ResManager.Initialize(AppConst.AssetDir, delegate() {
+            ResManager.Initialize(AppConst.AssetDir, delegate ()
+            //ResManager.Initialize("prefabs", delegate ()
+            {
                 Debug.Log("Initialize OK!!!");
                 this.OnInitialize();
             });
