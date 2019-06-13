@@ -11,8 +11,8 @@ namespace LuaFramework {
         Transform Parent {
             get {
                 if (parent == null) {
-                    //GameObject go = GameObject.FindWithTag("GuiCamera");
-                    GameObject go = GameObject.FindWithTag("Canvas");
+                    GameObject go = GameObject.FindWithTag("GuiCamera");
+                    //GameObject go = GameObject.FindWithTag("Canvas");
                     if (go != null) parent = go.transform;
                 }
                 return parent;
