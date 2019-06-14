@@ -11,7 +11,6 @@ end
 
 --初始化完成，发送链接服务器信息--
 function Game.OnInitOK()
-
     --注册LuaView--
     this.InitViewPanels();
 

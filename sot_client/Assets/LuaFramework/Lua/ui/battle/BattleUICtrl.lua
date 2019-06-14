@@ -14,7 +14,7 @@ end
 
 function BattleUICtrl.Awake()
 	logError("BattleUICtrl.Awake--->>");
-    panelMgr:CreatePanel('BattleUI', "battle/battleuipanel", this.OnCreate);
+    panelMgr:CreatePanel('panel_battle', BattleUIPanel, this.OnCreate);
 end
 
 --启动事件--
@@ -24,6 +24,7 @@ function BattleUICtrl.OnCreate(obj)
 	panel = transform:GetComponent('UIPanel');
 	prompt = transform:GetComponent('LuaBehaviour');
 	logError("Start lua--->>"..gameObject.name);
+	logError("BattleUIPanel.btnOpen --->>"..tostring(BattleUIPanel.btnOpen));
 
 	prompt:AddClick(BattleUIPanel.btnOpen, this.OnClick);
 	--resMgr:LoadPrefab('prompt_item', { 'PromptItem' }, this.InitPanel);

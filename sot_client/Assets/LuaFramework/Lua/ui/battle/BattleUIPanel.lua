@@ -5,12 +5,12 @@ BattleUIPanel = {};
 local this = BattleUIPanel;
 
 --启动事件--
-function BattleUIPanel.Awake(obj)
+function BattleUIPanel.Awake(obj, arg1, arg2, arg3)
 	gameObject = obj;
 	transform = obj.transform;
 
 	this.InitPanel();
-	logError("Awake lua--->>"..gameObject.name);
+	--logError("Awake lua--->>"..gameObject.name);
 end
 
 --初始化面板--
