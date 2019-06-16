@@ -1,4 +1,4 @@
-require "Common/define"
+require "common/define"
 require "battle_ui"
 
 CtrlManager = {};

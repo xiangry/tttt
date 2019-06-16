@@ -1,4 +1,4 @@
-require "Common/functions"
+require "common/functions"
 
 require "enum/main"
 require "framework/main"
@@ -11,14 +11,11 @@ local this = Game;
 
 --初始化完成，发送链接服务器信息--
 function Game.OnInitOK()
-    --local battleUi = BattleUICtrl:new()
-    --local ctrl = BattleUICtrl.New()
-    --ctrl.Awake()
     SOTUiManager = UiManager:new()
     SOTUiManager:PushUi(EUI.BattleUI)
 end
 
 --销毁--
 function Game.OnDestroy()
-	--logWarn('OnDestroy--->>>');
+	logWarn('OnDestroy--->>>');
 end

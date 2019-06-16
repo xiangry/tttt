@@ -1,4 +1,4 @@
-require "Common/define"
+require "common/define"
 
 require "framework/3rd/pblua/login_pb"
 require "framework/3rd/pbc/protobuf"

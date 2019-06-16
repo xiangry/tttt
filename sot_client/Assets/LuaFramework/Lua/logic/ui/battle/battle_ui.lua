@@ -13,14 +13,14 @@ function BattleUI:InitUI(obj)
 	self.btnOpen = obj.transform:Find("animation/top_cont/control/btn_pause").gameObject;
 	self.luaBehavior:AddClick(self.btnOpen, Utility.handler(self, self.OnClick));
 
-	logError("self.btnOpen ---------------- " .. tostring(self.btnOpen))
+	log("self.btnOpen ---------------- " .. tostring(self.btnOpen))
 
 	UiBaseClass.InitUI(self, obj)
 end
 
 --单击事件--
 function BattleUI:OnClick(go)
-	logError("OnClick---->>>"..go.name);
+	log("OnClick---->>>"..go.name);
 end
 
 return BattleUI
