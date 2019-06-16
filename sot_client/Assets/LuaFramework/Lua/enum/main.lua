@@ -1,2 +1,2 @@
-
-script.run("logic/public/enum.lua");
+require("enum/enum");
+require("enum/notice");

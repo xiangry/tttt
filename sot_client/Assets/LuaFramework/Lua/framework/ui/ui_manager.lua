@@ -4,24 +4,26 @@ local UiManager = Class("UiManager");
 _G["UiManager"] = UiManager
 
 EUI  = {
-	NavigationBar                     = "NavigationBar";
+	BattleUICtrl                     = "BattleUICtrl";
 }
 
-local uiInformation                                  = {};
-uiInformation[EUI.MainUi]                            = { btnBack = false, background = false, showLast = false, };
+local uiInformation = {};
+uiInformation[EUI.BattleUICtrl] = { btnBack = false, background = false, showLast = false, };
 
 -------------------------导航条栏目图片标题(没有设置则不显示)---------------
-uiInformation[EUI.MainUi].sp_title              = "title_1"
-uiInformation[EUI.MainUi].coin              = { id = 21, get_way = false, }
+uiInformation[EUI.BattleUICtrl].sp_title = "title_1"
+uiInformation[EUI.BattleUICtrl].coin = { id = 21, get_way = false, }
 ------------------------ 隐藏 导航条（默认0全部显示 1隐藏 2隐藏三个货币栏） ----------------------
-uiInformation[EUI.MainUi].showState           = 1
+uiInformation[EUI.BattleUICtrl].showState = 1
 ------------------------ 导航条公用底图（默认底图 ENUM.PublicBgImage.DLD 可不配置） ----------------------
-uiInformation[EUI.MainUi].resBg               = ESnkBG.COMMON
+uiInformation[EUI.BattleUICtrl].resBg = ""
 ------------------------ ui界面的背景音乐，不配置的话就不改变 ----------------------
-uiInformation[EUI.MainUi].backAudioId           = ENUM.EUiAudioBGM.MainCityBgm;
+uiInformation[EUI.BattleUICtrl].backAudioId = ENUM.EUiAudioBGM.MainCityBgm;
 
-UiManager.ClassList                                  = {
-	[EUI.MainUi]                            = { MainUI },
+require("ui/battle/BattleUICtrl")
+
+UiManager.ClassList = {
+	[EUI.BattleUICtrl] = { BattleUICtrl },
 }
 
 function UiManager:InitData()
@@ -39,7 +41,7 @@ end
 
 function UiManager:createUI(id, param)
 	local new_info = uiInformation[id];
-	--    app.log("show UI:"..id)
+	app.log("show UI:"..id)
 	if self.scene_list[id] == nil then
 		self.scene_list[id] = {};
 		if self.ClassList[id] == nil then
@@ -58,7 +60,6 @@ function UiManager:createUI(id, param)
 					self.scene_list[id].scene:ShowParam(param);
 				end
 				self.scene_list[id].scene:Show();
-				-- self.scene_list[id].scene:MsgRegist();
 				self.scene_list[id].scene:UpdateUi();
 			end
 		else
@@ -70,7 +71,6 @@ function UiManager:createUI(id, param)
 end
 
 function UiManager:Init()
-	--app.log_error("UiManager Init=====================")
 	self:InitData();
 end
 
@@ -94,73 +94,10 @@ function UiManager:RemoveUi(push_uid)
 	end
 end
 
--- 界面打点记录配置
-local _SendRecordConfig = {
-	-- 1.商店
-	-- [EUI.ShopUI] = 10000001,
-	-- 2.排行
-	[EUI.RankUI]           = 10000002,
-	-- 3.邮件
-	[EUI.MailListUI]       = 10000003,
-	-- 4.签到
-	[EUI.MonthSignUi]      = 10000004,
-	-- 5.首冲
-	[EUI.UiFirstRecharge]  = 10000005,
-	-- 6.董香之屋
-	[EUI.VipPackingUI]     = 10000006,
-	-- 7.活动
-	[EUI.ActivityUI]       = 10000007,
-	-- 8.酒吧
-	[EUI.GoldenEggUI]      = 10000008,
-	-- 9.贩卖机
-	[EUI.VendingMachineUI] = 10000009,
-	-- 10.任务
-	[EUI.UiDailyTask]      = 10000010,
-	-- 11.阵容
-	[EUI.LineupUi]         = 10000011,
-	-- 12.角色
-	-- [EUI.HeroPackageUI] = 10000012,
-	-- 13.招募
-	[EUI.EggHeroUi]        = 10000013,
-	-- 14.背包
-	[EUI.PackageUi]        = 10000014,
-	-- 15.闯关
-	[EUI.UiLevel]          = 10000015,
-	-- 16.兑换金币
-	[EUI.GoldExchangeUI]   = 10000016,
-	-- 17.兑换体力
-	[EUI.HpExchange]       = 10000017,
-	-- 18.兑换钻石
-	[EUI.StoreUI]          = 10000018,
-	-- 19.玩家信息
-	[EUI.UiSet]            = 10000019,
-	-- 20.回收
-	[EUI.RecoverIndex]     = 10000020,
-
-	--snk
-	[EUI.UiSet]            = 10000019,
-	-- 12.角色
-	[EUI.HeroList]         = 10000012,
-	--
-	[EUI.ShopMain]         = 10000001,
-
-}
-
-function UiManager:SendDataRecord(scene_id)
-	if scene_id and _SendRecordConfig[scene_id] then
-		-- SystemLog.SceneSwitch(_SendRecordConfig[scene_id] .. "_", os.time());
-		--        SystemLog.AppStartClose(_SendRecordConfig[scene_id])
-	end
-end
-
---[[
-is_destroy 上级界面是否销毁，默认为true销毁
-]]
+---@param scene_id string
+---@param param table	功能需要的参数
 function UiManager:PushUi(scene_id, param)
-	-- app.log_error(tostring(scene_id).."....."..debug.traceback())
 	app.log(tostring(scene_id) .. "....." .. debug.traceback())
-	-- 发送打点记录
-	self:SendDataRecord(scene_id)
 	local cur_scene_id = nil;
 	if #self.ui_stack ~= 0 then
 		cur_scene_id = self.ui_stack[#self.ui_stack];
@@ -169,65 +106,20 @@ function UiManager:PushUi(scene_id, param)
 	if cur_scene_id == scene_id then
 		return self.scene_list[scene_id].scene;
 	end
-	self.ui_stack[#self.ui_stack + 1] = scene_id;
-	app.log("PushUi " .. tostring(scene_id));
+	self:PushUIStack(scene_id)
 
 	--如果管理器已经销毁，则只进行栈操作，不显示ui
 	if self.have_destroy == true then
-		--if cur_scene_id and self.scene_list[cur_scene_id] and self.scene_list[cur_scene_id].scene and self.scene_list[cur_scene_id].scene.ui == nil then
 		if cur_scene_id and self.scene_list[cur_scene_id] and self.scene_list[cur_scene_id].scene then
 			self:_HideLastUi(scene_id, true);
 		end
 		self.ClassList[scene_id].temp_param = param
 		return ;
 	end
-	--如果当前ui是主界面  push界面不是主界面  那么需要记录切换界面时间
-	if cur_scene_id == EUI.MMOMainUI and scene_id ~= EUI.MMOMainUI then
-		if GetMainUI() and GetMainUI().SetLeaveTime then
-			GetMainUI():SetLeaveTime();
-		end
-	end
 
-	--隐藏tips
-	-- SkillTips.EnableSkillTips(false);
-	-- GoodsTips.EnableGoodsTips(false);
-	-- RestraintTips.ShowTips(false);
-	-- if GetMainUI() and GetMainUI():GetSkillInput() then
-	-- 	GetMainUI():GetSkillInput():CancelSkillEffect();
-	-- end
-
-	local new_id   = scene_id
-	local new_info = uiInformation[scene_id];
-	-- 当上级要显示时，查找最近的一个navbarState配置情况
-	if new_info.showLast then
-		for i = #self.ui_stack - 1, 1, -1 do
-			local id  = self.ui_stack[i];
-			new_id    = id;
-			new_info  = uiInformation[id];
-			new_scene = self.scene_list[id];
-			if not new_info.showLast then
-				break ;
-			end
-		end
-	end
 	self:_HideLastUi(scene_id, false);
-	-- self:SetNavbarState(new_info,nil,nil,false);
-	if new_info.background then
-		-- 如果有背景，则等背景加载完后，再隐藏上级界面
-		self:SetNavbarState(new_info, new_id, nil, function()
-			-- 隐藏上级界面
-			for k, id in pairs(self.ui_stack) do
-				local scene_info = self.scene_list[id];
-				if scene_info and scene_info.scene and not scene_info.isShow and scene_info.scene:IsShow() then
-					scene_info.scene:Hide();
-				end
-			end
-		end)
-	end
-
 
 	-- 显示当前界面
-	--    app.log("param==========="..tostring(param).." scene_id============="..tostring(scene_id))
 	param           = param or self.ClassList[scene_id][2];
 	local new_scene = self:createUI(scene_id, param);
 	local cur_scene = new_scene;
@@ -237,20 +129,8 @@ function UiManager:PushUi(scene_id, param)
 				function()
 					g_SnkNoticeManager:Notice(ENUM.NoticeType.PushUiLoadOk, scene_id)
 					self:ChangeBackAudio(scene_id)
-					--GNoticeGuideTipUiUpdate(scene_id);
-					GTipsNoticeUiUpdate(scene_id);
-					if not new_info.background then
-						self:SetNavbarState(new_info, new_id)
-						for k, id in pairs(self.ui_stack) do
-							local scene_info = self.scene_list[id];
-							if scene_info and scene_info.scene and not scene_info.isShow and scene_info.scene:IsShow() then
-								scene_info.scene:Hide();
-							end
-						end
-					end
 				end
 	);
-	PublicFunc.msg_dispatch(UiManager.PushUi, scene_id)
 
 	return self.scene_list[scene_id].scene
 end
@@ -260,11 +140,8 @@ function UiManager:PopUi(param, bOnlyStack)
 		return ;
 	end
 	--隐藏tips
-	-- SkillTips.EnableSkillTips(false);
-	-- GoodsTips.EnableGoodsTips(false);
-	-- RestraintTips.ShowTips(false);
 	if #self.ui_stack <= 1 then
-
+		app.log_error("UiManager PopUi but #ui_stack < 1 " .. tostring(param))
 	else
 		local cur_scene_id = self.ui_stack[#self.ui_stack];
 		app.log("PopUi ui:" .. tostring(cur_scene_id));
@@ -299,29 +176,25 @@ function UiManager:PopUi(param, bOnlyStack)
 		end
 		if not bOnlyStack then
 			self.isPoping = true;
-			-- self:SetNavbarState(new_info, new_scene.scene,nil,false);
 			if new_info.background then
-				self:SetNavbarState(new_info, new_id, new_scene.scene, function()
-					local cur_scene_info = self.scene_list[cur_scene_id];
-					self.isPoping        = false;
-					if cur_scene_info then
-						if not bOnlyStack then
-							if cur_scene_info.scene then
-								-- 销毁当前界面
-								cur_scene_info.scene:DestroyUi(true);
-							else
-								app.log_error("#lhf#cur_scene_id:" .. tostring(cur_scene_id) .. " info:" .. table.tostring(cur_scene_info) .. debug.traceback());
-							end
+				local cur_scene_info = self.scene_list[cur_scene_id];
+				self.isPoping        = false;
+				if cur_scene_info then
+					if not bOnlyStack then
+						if cur_scene_info.scene then
+							-- 销毁当前界面
+							cur_scene_info.scene:DestroyUi(true);
+						else
+							app.log_error("#lhf#cur_scene_id:" .. tostring(cur_scene_id) .. " info:" .. table.tostring(cur_scene_info) .. debug.traceback());
 						end
 					end
-				end)
+				end
 			end
 			new_scene.scene:SetLoadedCallback(
 						function()
 							self:ChangeBackAudio(scene_id)
 							if not new_info.background then
 								self.isPoping = false;
-								self:SetNavbarState(new_info, new_id, new_scene.scene)
 								local cur_scene_info = self.scene_list[cur_scene_id];
 								if cur_scene_info then
 									if not bOnlyStack then
@@ -334,29 +207,18 @@ function UiManager:PopUi(param, bOnlyStack)
 									end
 								end
 							end
-							--GNoticeGuideTipUiUpdate(scene_id);
-							GTipsNoticeUiUpdate(scene_id);
 						end
 			);
-
 		end
 
-		-- if GuideManager.IsGuideRuning() then
-		--     GuideManager.CheckWaitFunc( "pop_ui", cur_scene_id )
-		-- end
 		g_SnkNoticeManager:Notice(ENUM.NoticeType.PopUi, cur_scene_id)
-		PublicFunc.msg_dispatch(UiManager.PopUi, self.ui_stack[#self.ui_stack]);
-
-		-- 通知一下主界面显示
-		if #self.ui_stack == 1 and self.ui_stack[1] == EUI.MMOMainUI then
-			g_SnkNoticeManager:Notice(ENUM.NoticeType.PushUi, EUI.MMOMainUI, new_scene)
-		end
 	end
 end
 
 --增加UI栈计数
 function UiManager:PushUIStack(scene_id)
 	self.ui_stack[#self.ui_stack + 1] = scene_id
+	app.log("PushUi " .. tostring(scene_id));
 end
 
 function UiManager:PopUIStack()
@@ -387,25 +249,6 @@ function UiManager:ReplaceUi(scene_id, param)
 	-- 显示后面的界面
 	local new_scene, new_info, new_id;
 	local cur_scene;
-	-- for i=#self.ui_stack,1,-1 do
-	--     local id = self.ui_stack[i];
-	--     local cf = uiInformation[id];
-	--     if scene_id == id then
-	--         new_scene,new_info = self:createUI(id,param);
-	--         cur_scene = new_scene;
-	--     else
-	--         new_scene,new_info = self:createUI(id);
-	--     end
-	--     local scene_info = self.scene_list[id];
-	--     if scene_info then
-	--         if not cf.showLast then
-	--             break;
-	--         end
-	--     else
-	--         break;
-	--     end
-	-- end
-
 	local needShowIndex = {}
 	local stackCount    = #self.ui_stack
 	for i = stackCount, 1, -1 do
@@ -430,14 +273,9 @@ function UiManager:ReplaceUi(scene_id, param)
 		end
 	end
 
-
-	-- self:SetNavbarState(new_info, new_scene.scene,nil,false)
 	cur_scene.scene:SetLoadedCallback(
 				function()
 					self:ChangeBackAudio(scene_id)
-					self:SetNavbarState(new_info, new_id, new_scene.scene)
-					--GNoticeGuideTipUiUpdate(scene_id);
-					GTipsNoticeUiUpdate(scene_id);
 					if not uiInformation[scene_id].showLast then
 						for i = #self.ui_stack - 1, 1, -1 do
 							local id         = self.ui_stack[i];
@@ -451,7 +289,6 @@ function UiManager:ReplaceUi(scene_id, param)
 				end
 	);
 	return self.scene_list[scene_id].scene
-	-- self:SetNavbarState(new_info, new_scene.scene)
 end
 
 function UiManager:ClearStack()
@@ -469,7 +306,6 @@ function UiManager:ClearStack()
 	for k, v in pairs(self.scene_list) do
 		if k ~= self.ui_stack[1]
 					and k ~= self.ui_stack[2]
-					and k ~= EUI.NavigationBar
 		then
 			v.scene:DestroyUi(true);
 			v.isShow = false
@@ -479,16 +315,6 @@ end
 
 function UiManager:SetStackSize(size)
 	self.isPoping = nil
-
-	--隐藏tips
-	-- SkillTips.EnableSkillTips(false);
-	-- CommonGoodsTips.HideUI();
-	-- RestraintTips.ShowTips(false);
-	-- CommonAward.Destroy();
-	-- AreaSurveyResultUi.Destroy();
-	-- CommonAwardVip.Destroy();
-	-- CommonRaids.Destroy();
-	-- MysteryShopPopupUI.Destroy();
 
 	if size < 1 or self:GetUICount() <= size then
 		return
@@ -511,7 +337,7 @@ function UiManager:SetStackSize(size)
 		end
 
 		if v.scene then
-			if destroy == true and k ~= EUI.NavigationBar then
+			if destroy == true then
 				v.scene:Hide()
 				v.scene:DestroyUi(true)
 				self.scene_list[k] = nil
@@ -536,41 +362,6 @@ function UiManager:SetStackSize(size)
 			end
 		end
 	end
-
-	self:SetNavbarState(new_info, new_id, new_scene and new_scene.scene)
-	if size == 1 then
-		g_SnkNoticeManager:Notice(ENUM.NoticeType.PushUi, EUI.MMOMainUI, new_scene)
-	end
-	PublicFunc.msg_dispatch(UiManager.SetStackSize, self.ui_stack[#self.ui_stack]);
-end
-
-function UiManager:GetNavLayerCnt()
-	local count = 0
-	for i, v in ipairs(self.ui_stack) do
-		if not uiInformation[v].showLast then
-			count = count + 1
-		end
-	end
-	return count
-end
-
-function UiManager:SetNavbarState(scene_info, scene_id, new_scene, tex_callback, set_BG)
-	-- if new_scene == nil then
-	--     return;
-	-- end
-	local callback = tex_callback;
-	-- if tex_callback then
-	--     local function delay()
-	--         Utility.CallFunc(tex_callback);
-	--     end
-	--     callback = function ()
-	--         timer.create(Utility.create_callback(delay),100,1);
-	--     end
-	-- end
-
-	if self.scene_list[EUI.NavigationBar] ~= nil and self.scene_list[EUI.NavigationBar].scene ~= nil then
-		self.scene_list[EUI.NavigationBar].scene:UpdateInfo(scene_info, scene_id, new_scene, callback, set_BG);
-	end
 end
 
 function UiManager:DestroyAll(delete_all)
@@ -578,42 +369,16 @@ function UiManager:DestroyAll(delete_all)
 		if v.scene then
 			v.scene:Hide();
 			if v.scene.DestroyUi then
-				-- local dont_destroy = true
-
-				-- if v.scene.pathRes then
-				--    dont_destroy =  ResourceManager.is_reserved_res(v.scene.pathRes)
-				-- end
-				--            app.log("UiManager:DestroyAll:"..tostring(v.scene.pathRes).."dont_destroy:"..tostring(dont_destroy).." id:"..tostring(k))
-				--            if not dont_destroy then
 				v.scene:DestroyUi(false);
 				if delete_all then
 					self.scene_list[k] = nil;
 				end
-
-				--            else
-				--                 v.scene:Hide()
-				--            end
 			end
 		else
 			app.log_error("#lhf#k:" .. tostring(k) .. " v:" .. table.tostring(v) .. debug.traceback());
 		end
 	end
-	if self.sureBigDlg then
-		self.sureBigDlg:DestroyUi();
-		self.sureBigDlg = nil;
-	end
-	if self.cardLook then
-		self.cardLook:DestroyUi();
-		self.cardLook = nil;
-	end
-	if self.bigcard then
-		self.bigcard:DestroyUi();
-		self.bigcard = nil;
-	end
-	if self.alertDlg then
-		self.alertDlg:DestroyUi();
-		self.alertDlg = nil;
-	end
+
 	self.have_destroy = true;
 
 	if self.global_uis then
@@ -621,10 +386,6 @@ function UiManager:DestroyAll(delete_all)
 			k:DestroyUi()
 		end
 		self.global_uis = {}
-	end
-
-	if self.ui_animation then
-		self.ui_animation = {}
 	end
 
 	if table.get_num(self.destroy_stack_mark) > 0 then
@@ -651,13 +412,7 @@ function UiManager:DestroyAll(delete_all)
 		self.destroy_stack_mark = {}
 	end
 
-	-- 关闭规则说明
-	if UiRuleDes and UiRuleDes.End then
-		UiRuleDes.End()
-	end
-
 	self.curBackAudioId = nil;
-	-- AudioManager.Stop(nil, true)
 end
 
 function UiManager:Restart()
@@ -666,16 +421,6 @@ function UiManager:Restart()
 	end
 	app.log("UiManager:Restart");
 	self.have_destroy = false;
-	local _loadingId  = GLoading.Show(GLoading.EType.loading);
-
-	if self.scene_list[EUI.NavigationBar].scene == nil then
-		--app.log_error("new navi bar...")
-		--self.scene_list[EUI.NavigationBar].scene = NavbarUI:new();
-		self.scene_list[EUI.NavigationBar].scene = SnkUiNavbar:new();
-	else
-		self.scene_list[EUI.NavigationBar].scene:Restart();
-		--app.log_error("navi bar restart...")
-	end
 
 	local scene_id = self.ui_stack[#self.ui_stack];
 	local new_id   = scene_id;
@@ -699,18 +444,11 @@ function UiManager:Restart()
 			top_scene = new_scene
 		end
 	end
-	self:SetNavbarState(new_info, new_id, new_scene and new_scene.scene, nil, false)
-
 
 	local function loadOkCallback()
 		self:ChangeBackAudio(scene_id)
 		num = num - 1;
 		if num == 0 then
-			self:SetNavbarState(new_info, new_id, new_scene and new_scene.scene)
-			--GNoticeGuideTipUiUpdate(scene_id);
-			GTipsNoticeUiUpdate(scene_id);
-			GLoading.Hide(GLoading.EType.loading, _loadingId);
-
 			g_SnkNoticeManager:Notice(ESnkEvent.UiManagerRestartDone, top_eui, top_scene)
 		end
 	end
@@ -735,15 +473,6 @@ function UiManager:SetDestroyStackMark(scene_id)
 end
 
 ---@return UiBaseClass
-function UiManager:GetNavigationBarUi()
-	if self.scene_list and self.scene_list[EUI.NavigationBar] and self.scene_list[EUI.NavigationBar].scene then
-		return self.scene_list[EUI.NavigationBar].scene;
-	else
-		return nil;
-	end
-end
-
----@return UiBaseClass
 function UiManager:GetCurScene()
 	local cur_scene_id = self.ui_stack[#self.ui_stack];
 	if self.scene_list[cur_scene_id] then
@@ -759,45 +488,7 @@ function UiManager:UpdateCurScene(info_type)
 end
 
 function UiManager:Begin()
-
-	--    app.log("UiManager:Begin");
-
-	--self.ui_root = asset_game_object.find("ui_2d");
-	self.scene_list[EUI.NavigationBar]        = {};
-	--self.scene_list[EUI.NavigationBar].scene = NavbarUI:new();
-	self.scene_list[EUI.NavigationBar].scene  = SnkUiNavbar:new();
-	self.scene_list[EUI.NavigationBar].isShow = true;
 	self.have_destroy                         = false;
-end
-
-function UiManager:getSureBigDlg()
-	if (self.sureBigDlg == nil) then
-		self.sureBigDlg = SureBigDlgUI:new();
-	end
-	return self.sureBigDlg;
-end
-
-function UiManager:getCheckinDlg()
-	if (self.checkinDlg == nil) then
-		self.checkinDlg = CheckinDlgUI:new();
-	end
-	return self.checkinDlg;
-end
-
---[[世界聊天]]
-function UiManager:getTalkWordUI()
-	if (self.talkWordUI == nil) then
-		self.talkWordUI = TalkWordUI:new();
-	end
-	return self.talkWordUI;
-end
-
---[[私聊]]
-function UiManager:getTalkWhisper()
-	if (self.talkWhisperUI == nil) then
-		self.talkWhisperUI = TalkWhisperUI:new();
-	end
-	return self.talkWhisperUI;
 end
 
 function UiManager:FindUI(sceneID)
@@ -829,43 +520,6 @@ function UiManager:UpdateMsgDataEx(uiName, funcName, ...)
 		ui[funcName](ui, ...);
 	end
 end
---设置美术字
---参数:   num：要显示的数字
---        parent:所有美术字体sprite的父节点
-function UiManager:SetArtFont(num, parent)
-	if (num == nil or parent == nil) then
-		app.log_error("设置美术字：传入参数不对");
-		return ;
-	end
-
-	local weishu = #tostring(num);
-	local digit  = 1;          --代表位数，1为个位，2为十位，3为百位，以此类推
-	for i = 1, weishu do
-		local ArtSprite = ngui.find_sprite(parent, "sp_" .. digit);
-		digit           = digit + 1;
-		if (nil ~= ArtSprite) then
-			local spName = ArtSprite:get_sprite_name();
-			local n      = string.sub(tostring(num), weishu - i + 1, weishu - i + 1)   --n为num的个位，十位，百位数字
-			spName       = string.gsub(spName, string.match(spName, '[%d]*$'), n)    --将spName的最后的数字替换为n
-			ArtSprite:set_sprite_name(spName);
-		else
-			app.log_error("找不到名为sp_" .. (digit - 1) .. "的图片");
-		end
-	end
-
-	local nn = 1;
-	while (true) do
-		local ArtSprite = ngui.find_sprite(parent, "sp_" .. weishu + nn);
-		if (ArtSprite ~= nil) then
-			local spName = ArtSprite:get_sprite_name();
-			spName       = string.gsub(spName, string.match(spName, '[%d]*$'), 999);
-			ArtSprite:set_sprite_name(spName);
-			nn = nn + 1;
-		else
-			break ;
-		end
-	end
-end
 
 function UiManager:Update(dt)
 	local size = #self.ui_stack
@@ -884,8 +538,6 @@ function UiManager:Update(dt)
 			ui:Update(dt)
 		end
 	end
-
-	self:UpdateUIAnimation(dt);
 end
 
 function UiManager:GetCurSceneID()
@@ -962,13 +614,6 @@ function UiManager:Show()
 			new_scene, new_info = self:createUI(v, self.ClassList[v][2]);
 		end
 	end
-	self:SetNavbarState(new_info, new_id, new_scene and new_scene.scene)
-
-	self.scene_list[EUI.NavigationBar].scene:Show()
-end
-
-function UiManager:SetRuleId(uiId, ruleId)
-	uiInformation[uiId].ruleId = ruleId;
 end
 
 function UiManager:AddGlobalUi(ui, needUpdate)
@@ -984,8 +629,6 @@ end
 function UiManager:ChangeBackAudio(cur_ui_id)
 	if uiInformation[cur_ui_id].backAudioId ~= nil then
 		if self.curBackAudioId == nil or self.curBackAudioId ~= uiInformation[cur_ui_id].backAudioId then
-			-- AudioManager.Stop(ENUM.EAudioType._2d, false)
-			-- AudioManager.Play2dAudioList({ [1] = { id = uiInformation[cur_ui_id].backAudioId, loop = -1 } });
 			self.curBackAudioId = uiInformation[cur_ui_id].backAudioId;
 		end
 	end
@@ -997,33 +640,3 @@ function UiManager:GetBackAudioId(cur_ui_id)
 	end
 	return nil;
 end
-
-function UiManager:AddUIAnimationCheck(obj, animation, callback)
-	if not self.ui_animation[obj:get_instance_id()] then
-		self.ui_animation[obj:get_instance_id()] = {
-			root           = obj,
-			animationName  = animation,
-			finishCallback = callback,
-		}
-		obj:animated_play(animation);
-	end
-end
-
-function UiManager:UpdateUIAnimation(dt)
-	for k, v in pairs(self.ui_animation) do
-		if not v.root:animated_is_playing(v.animationName) then
-			if v.finishCallback then
-				v.finishCallback();
-			end
-			self.ui_animation[k] = nil;
-		end
-	end
-end
-
-function UiManager:DeleteUIAnimation(obj)
-	if self.ui_animation[obj:get_instance_id()] then
-		self.ui_animation[obj:get_instance_id()] = nil;
-	end
-end
-
-return uiManager;

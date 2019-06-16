@@ -1,3 +1,3 @@
-script.run("framework/manager/audio_manager.lua");
-script.run("framework/manager/effect_manager.lua");
-script.run("framework/manager/notice_manager.lua");
+--require("framework/manager/audio_manager");
+--require("framework/manager/effect_manager");
+require("framework/manager/notice_manager");
