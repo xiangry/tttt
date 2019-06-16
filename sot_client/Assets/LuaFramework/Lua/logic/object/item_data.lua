@@ -3,9 +3,9 @@ local ItemData     = Class("ItemData", DataBase)
 _G["ItemData"] = ItemData
 
 function ItemData:Init(data)
-	self:ResetData(data);
+	self:UpdateData(data);
 end
 
-function ItemData:ResetData(data)
+function ItemData:UpdateData(data)
 
 end

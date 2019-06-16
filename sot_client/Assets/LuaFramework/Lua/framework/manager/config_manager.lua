@@ -2,7 +2,7 @@
 --auth: kevin
 --date: 2016/6/7
 --desc: config load helper...
-
+---@class ConfigManager
 ConfigManager = {
 	loadedConfigFiles = {}, --{{table = xxx, key = xxx_key }, ...}}
 
@@ -42,7 +42,6 @@ function ConfigManager.SpliceIndexName(name)
 	end
 	return EConfigIndex['t_'..tostring(name)]
 end
-
 
 function ConfigManager.Get(configName, dataID)
 --	util.begin_sample("config_get")

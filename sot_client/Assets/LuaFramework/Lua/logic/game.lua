@@ -13,6 +13,8 @@ local this = Game;
 function Game.OnInitOK()
     SOTUiManager = UiManager:new()
     SOTUiManager:PushUi(EUI.BattleUI)
+
+    logError(table.tostring({a = "123", b = { c = "dddd"}}))
 end
 
 --销毁--

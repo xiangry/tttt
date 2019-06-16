@@ -81,5 +81,5 @@ ENUM.EUiAudioBGM = {
 }
 
 EDataCenter = {
-
+	player = 1,
 }

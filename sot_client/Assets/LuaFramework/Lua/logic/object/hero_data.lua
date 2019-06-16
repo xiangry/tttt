@@ -3,9 +3,9 @@ local HeroData     = Class("HeroData", DataBase)
 _G["HeroData"] = HeroData
 
 function HeroData:Init(data)
-	self:ResetData(data);
+	self:UpdateData(data);
 end
 
-function HeroData:ResetData(data)
+function HeroData:UpdateData(data)
 
 end
