@@ -48,3 +48,11 @@ function findPanel(str)
 	end
 	return obj:GetComponent("BaseLua");
 end
+
+app = {}
+app.log = log
+app.log_warning = logWarn
+app.log_error = logError
+app.get_time_scale = function()
+	return 1
+end

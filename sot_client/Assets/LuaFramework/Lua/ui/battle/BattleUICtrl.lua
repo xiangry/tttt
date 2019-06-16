@@ -1,45 +1,24 @@
-BattleUICtrl = {};
-local this = BattleUICtrl;
+---@class BattleUICtrl
+local BattleUICtrl = Class("BattleUICtrl", UiBaseClass)
+_G["BattleUICtrl"] = BattleUICtrl
 
-local panel;
-local prompt;
-local transform;
-local gameObject;
+function BattleUICtrl:Init(data)
+	self.pathRes = "panel_battle";
 
---构建函数--
-function BattleUICtrl.New()
-	logWarn("BattleUICtrl.New--->>");
-	return this;
-end
-
-function BattleUICtrl.Awake()
-	logError("BattleUICtrl.Awake--->>");
-    panelMgr:CreatePanel('panel_battle', BattleUIPanel, this.OnCreate);
+	UiBaseClass.Init(self,data)
 end
 
 --启动事件--
-function BattleUICtrl.OnCreate(obj)
-	gameObject = obj;
-	transform = obj.transform;
-	panel = transform:GetComponent('UIPanel');
-	prompt = transform:GetComponent('LuaBehaviour');
-	logError("Start lua--->>"..gameObject.name);
-	logError("BattleUIPanel.btnOpen --->>"..tostring(BattleUIPanel.btnOpen));
+function BattleUICtrl:InitUI(obj)
+	self.btnOpen = obj.transform:Find("animation/top_cont/control/btn_pause").gameObject;
+	self.luaBehavior:AddClick(self.btnOpen, Utility.handler(self, self.OnClick));
 
-	prompt:AddClick(BattleUIPanel.btnOpen, this.OnClick);
-	--resMgr:LoadPrefab('prompt_item', { 'PromptItem' }, this.InitPanel);
-end
+	logError("self.btnOpen ---------------- " .. tostring(self.btnOpen))
 
---初始化面板--
-function BattleUICtrl.InitPanel(objs)
-end
-
---滚动项单击--
-function BattleUICtrl.OnItemClick(go)
-    log(go.name);
+	UiBaseClass.InitUI(self, obj)
 end
 
 --单击事件--
-function BattleUICtrl.OnClick(go)
+function BattleUICtrl:OnClick(go)
 	logError("OnClick---->>>"..go.name);
 end
