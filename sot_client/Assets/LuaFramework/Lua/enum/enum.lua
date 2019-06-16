@@ -79,3 +79,7 @@ ENUM.EPackageType =
 ENUM.EUiAudioBGM = {
 	MainCityBgm = 1,
 }
+
+EDataCenter = {
+
+}
