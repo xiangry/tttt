@@ -1,1 +1,1 @@
-require("logic/snk/scene/snk_scene_manager");
+require("framework/scene/scene_manager");
