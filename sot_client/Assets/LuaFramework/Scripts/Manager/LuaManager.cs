@@ -129,5 +129,15 @@ namespace LuaFramework {
             lua = null;
             loader = null;
         }
+
+        public LuaState GetLuaState()
+        {
+            return lua;
+        }
+
+        public LuaLooper GetLuaLooper()
+        {
+            return loop;
+        }
     }
 }

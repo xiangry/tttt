@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 2223696645
+CRC: 1639606041
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -12,25 +12,24 @@ AssetBundleManifest:
       Name: shared.unity3d
       Dependencies: {}
     Info_3:
-      Name: battle/battlepausepanel.unity3d
-      Dependencies:
-        Dependency_0: battle_pause.unity3d
-        Dependency_1: battle/role_info.unity3d
-    Info_4:
-      Name: battle/battleuipanel.unity3d
-      Dependencies:
-        Dependency_0: battle.unity3d
-        Dependency_1: shared.unity3d
-    Info_5:
       Name: battle/button.unity3d
       Dependencies:
         Dependency_0: battle.unity3d
-    Info_6:
+    Info_4:
       Name: battle/role_info.unity3d
       Dependencies:
         Dependency_0: battle_pause.unity3d
-    Info_7:
+    Info_5:
       Name: battle/skill_1.unity3d
       Dependencies:
         Dependency_0: battle.unity3d
         Dependency_1: shared.unity3d
+    Info_6:
+      Name: battle/panel_battle.unity3d
+      Dependencies:
+        Dependency_0: battle.unity3d
+        Dependency_1: shared.unity3d
+    Info_7:
+      Name: battle/panel_battle_puase.unity3d
+      Dependencies:
+        Dependency_0: battle_pause.unity3d

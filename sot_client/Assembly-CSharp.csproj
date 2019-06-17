@@ -73,6 +73,7 @@
     <Compile Include="Assets\LuaFramework\Scripts\Framework\Core\Facade.cs" />
     <Compile Include="Assets\LuaFramework\Scripts\Framework\Core\Manager.cs" />
     <Compile Include="Assets\LuaFramework\Scripts\Framework\Core\Message.cs" />
+    <Compile Include="Assets\LuaFramework\Scripts\Framework\Core\Tools.cs" />
     <Compile Include="Assets\LuaFramework\Scripts\Framework\Core\View.cs" />
     <Compile Include="Assets\LuaFramework\Scripts\Framework\Interfaces\ICommand.cs" />
     <Compile Include="Assets\LuaFramework\Scripts\Framework\Interfaces\IController.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="Assets\LuaFramework\Scripts\Framework\Interfaces\IView.cs" />
     <Compile Include="Assets\LuaFramework\Scripts\Main.cs" />
     <Compile Include="Assets\LuaFramework\Scripts\Manager\GameManager.cs" />
+    <Compile Include="Assets\LuaFramework\Scripts\Manager\GameResManager.cs" />
     <Compile Include="Assets\LuaFramework\Scripts\Manager\Interface\ITimerBehaviour.cs" />
     <Compile Include="Assets\LuaFramework\Scripts\Manager\LuaManager.cs" />
     <Compile Include="Assets\LuaFramework\Scripts\Manager\NetworkManager.cs" />

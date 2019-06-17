@@ -87,7 +87,7 @@ namespace LuaFramework {
         /// </summary>
         void LoadAsset<T>(string abName, string[] assetNames, Action<UObject[]> action = null, LuaFunction func = null) where T : UObject {
             abName = GetRealAssetPath(abName);
-
+            Debug.LogError("LoadAsset abName -------- real path in " + abName);
             LoadAssetRequest request = new LoadAssetRequest();
             request.assetType = typeof(T);
             request.assetNames = assetNames;
